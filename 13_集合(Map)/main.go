@@ -3,27 +3,40 @@ package main
 import "fmt"
 
 func main() {
-	var siteMap map[string]string /*创建集合 */
-	siteMap = make(map[string]string)
+	// 创建并初始化一个空的 map
+	emptyMap := make(map[string]int)
+	fmt.Println("Empty Map:", emptyMap)
 
-	/* map 插入 key - value 对,各个国家对应的首都 */
-	siteMap["Google"] = "谷歌"
-	siteMap["Runoob"] = "菜鸟教程"
-	siteMap["Baidu"] = "百度"
-	siteMap["Wiki"] = "维基百科"
+	// 创建并初始化一个带有初始键值对的 map
+	person := map[string]string{
+		"name":  "John",
+		"age":   "30",
+		"email": "john@example.com",
+	}
+	fmt.Println("Person Map:", person)
 
-	/*使用键输出地图值 */
-	for site := range siteMap {
-		fmt.Println(site, "首都是", siteMap[site])
+	// 添加元素到 map 中
+	person["address"] = "123 Main St"
+	fmt.Println("Updated Person Map:", person)
+
+	// 获取 map 中的值
+	name := person["name"]
+	fmt.Println("Name:", name)
+
+	// 检查 map 中的键是否存在
+	_, ok := person["gender"]
+	fmt.Println("Gender exists?", ok)
+
+	// 删除 map 中的键值对
+	delete(person, "age")
+	fmt.Println("Updated Person Map (after deletion):", person)
+
+	// 迭代遍历 map
+	for key, value := range person {
+		fmt.Printf("%s: %s\n", key, value)
 	}
 
-	/*查看元素在集合中是否存在 */
-	name, ok := siteMap["Facebook"] /*如果确定是真实的,则存在,否则不存在 */
-	/*fmt.Println(capital) */
-	/*fmt.Println(ok) */
-	if ok {
-		fmt.Println("Facebook 的 站点是", name)
-	} else {
-		fmt.Println("Facebook 站点不存在")
-	}
+	// 获取 map 的长度
+	length := len(person)
+	fmt.Println("Length of the Person Map:", length)
 }
