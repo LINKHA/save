@@ -1,1 +1,1 @@
-sss--test
+print(string.find("hello hello"," hel"))
