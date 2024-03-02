@@ -1,13 +1,13 @@
 #include <iostream>
-#include <unordered_map>
+#include <map>
 #include <string>
 
 int main() {
-	// 初始化unordered_map
-	std::unordered_map<std::string, int> myMap;
+	// 初始化map
+	std::map<std::string, int> myMap;
 
 	// 使用insert添加元素
-	myMap.insert({ "apple", 5 });
+	myMap.insert(std::pair<std::string, int>("apple", 5));
 	myMap.insert(std::make_pair("banana", 2));
 
 	// 使用emplace直接在容器内构造元素
@@ -35,7 +35,7 @@ int main() {
 	// 删除元素
 	myMap.erase("banana");
 
-	// 遍历unordered_map
+	// 遍历map
 	std::cout << "Current map: " << std::endl;
 	for (const auto& pair : myMap) {
 		std::cout << pair.first << ": " << pair.second << std::endl;
@@ -44,7 +44,7 @@ int main() {
 	// 获取元素数量
 	std::cout << "Number of elements: " << myMap.size() << std::endl;
 
-	// 清空unordered_map
+	// 清空map
 	myMap.clear();
 
 	// 检查是否为空
