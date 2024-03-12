@@ -2,7 +2,7 @@
 #include <map>
 #include <string>
 
-int main() {
+int map_show() {
 	// ≥ı ºªØmap
 	std::map<std::string, int> myMap;
 

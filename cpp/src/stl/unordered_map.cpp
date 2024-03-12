@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <string>
 
-int main() {
+int unordered_map_show() {
 	// ≥ı ºªØunordered_map
 	std::unordered_map<std::string, int> myMap;
 
