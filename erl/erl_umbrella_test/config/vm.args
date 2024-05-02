@@ -1,0 +1,6 @@
+-sname erl_umbrella_test
+
+-setcookie erl_umbrella_test_cookie
+
++K true
++A30
