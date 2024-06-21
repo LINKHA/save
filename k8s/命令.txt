@@ -1,0 +1,32 @@
+kubectl create -f sample/apple.yaml
+kubectl create -f sample/banana.yaml
+
+kubectl delete -f sample/apple.yaml
+kubectl delete -f sample/banana.yaml
+
+kubectl create -f sample/ingress.yaml
+
+
+
+
+kubectl create deployment kubernetes-nginx --image=b2ok6pp5.mirror.aliyuncs.com/nginx:1.10
+
+kubectl delete deployment kubernetes-nginx
+
+kubectl create deployment kubernetes-nginx --image=hub-mirror.c.163.com/google_containers/nginx:1.10
+
+kubectl create deployment kubernetes-nginx --image=registry.docker-cn.com/nginx:1.10
+
+docker pull b2ok6pp5.mirror.aliyuncs.com/hashicorp/http-echo
+
+
+docker pull registry.openanolis.cn/openanolis/nginx:1.14.1-8.6
+
+
+
+docker pull registry.docker-cn.com/hashicorp/http-echo
+
+
+docker pull registry.docker-cn.com/hashicorp/http-echo
+
+docker pull b2ok6pp5.mirror.aliyuncs.com/google_containers/nginx:1.10

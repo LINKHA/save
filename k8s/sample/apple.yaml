@@ -1,0 +1,64 @@
+#外部直接调用\无状态
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apple-deployment
+  labels:
+    app: apple
+spec:
+  replicas: 3  # 指定希望运行的Pod副本数量
+  selector:
+    matchLabels:
+      app: apple
+  template:
+    metadata:
+      labels:
+        app: apple
+    spec:
+      containers:
+      - name: apple-app
+        image: b2ok6pp5.mirror.aliyuncs.com/hashicorp/http-echo
+        args:
+        - "-text=apple"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apple-clusterip-service
+spec:
+  selector:
+    app: apple
+  ports:
+  - protocol: TCP
+    port: 15678
+    targetPort: 5678
+  type: ClusterIP
+    
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apple-nodeport-service
+spec:
+  selector:
+    app: apple
+  ports:
+  - protocol: TCP
+    port: 30011
+    targetPort: 5678
+    nodePort: 30001
+  type: NodePort
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apple-loadbalancer-service
+spec:
+  selector:
+    app: apple
+  ports:
+  - protocol: TCP
+    port: 30021
+    targetPort: 5678
+  type: LoadBalancer

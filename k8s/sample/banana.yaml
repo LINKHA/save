@@ -1,0 +1,50 @@
+#外部直接调用\无状态
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banaana-deployment
+  labels:
+    app: banaana
+spec:
+  replicas: 3  # 指定希望运行的Pod副本数量
+  selector:
+    matchLabels:
+      app: banaana
+  template:
+    metadata:
+      labels:
+        app: banaana
+    spec:
+      containers:
+      - name: banaana-app
+        image: b2ok6pp5.mirror.aliyuncs.com/hashicorp/http-echo
+        args:
+        - "-text=banaana"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: banaana-clusterip-service
+spec:
+  selector:
+    app: banaana
+  ports:
+  - protocol: TCP
+    port: 5678
+    targetPort: 5678
+  type: ClusterIP
+    
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: banaana-nodeport-service
+spec:
+  selector:
+    app: banaana
+  ports:
+  - protocol: TCP
+    port: 5678
+    targetPort: 5678
+    nodePort: 30002
+  type: NodePort
