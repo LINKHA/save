@@ -1,50 +1,50 @@
-#外部直接调用\无状态
+#外部直接调用\有状态
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: banaana-deployment
+  name: banana-statefulset
   labels:
-    app: banaana
+    app: banana
 spec:
+  serviceName: "banana-headless-service"
   replicas: 3  # 指定希望运行的Pod副本数量
   selector:
     matchLabels:
-      app: banaana
+      app: banana
   template:
     metadata:
       labels:
-        app: banaana
+        app: banana
     spec:
       containers:
-      - name: banaana-app
+      - name: banana-app
         image: b2ok6pp5.mirror.aliyuncs.com/hashicorp/http-echo
         args:
-        - "-text=banaana"
+        - "-text=banana"
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: banaana-clusterip-service
+  name: banana-nodeport-service
 spec:
   selector:
-    app: banaana
+    app: banana
   ports:
   - protocol: TCP
-    port: 5678
-    targetPort: 5678
-  type: ClusterIP
-    
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: banaana-nodeport-service
-spec:
-  selector:
-    app: banaana
-  ports:
-  - protocol: TCP
-    port: 5678
+    port: 30012
     targetPort: 5678
     nodePort: 30002
   type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: banana-headless-service
+spec:
+  clusterIP: None
+  selector:
+    app: banana
+  ports:
+  - port: 30013
+    targetPort: 5678
+    name: banana-tcp

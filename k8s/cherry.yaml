@@ -1,0 +1,36 @@
+#外部直接调用\有状态
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cherry-{%1}-statefulset
+  labels:
+    app: cherry-{%1}
+spec:
+  serviceName: "cherry-{%1}-headless-service"
+  replicas: 1  # 指定希望运行的Pod副本数量
+  selector:
+    matchLabels:
+      app: cherry-{%1}
+  template:
+    metadata:
+      labels:
+        app: cherry-{%1}
+    spec:
+      containers:
+      - name: cherry-{%1}-app
+        image: b2ok6pp5.mirror.aliyuncs.com/hashicorp/http-echo
+        args:
+        - "-text=cherry-{%1}"
+---
+#这种方式相对于ClusterIP少走一步proxy
+apiVersion: v1
+kind: Service
+metadata:
+  name: cherry-{%1}-headless-service
+spec:
+  clusterIP: None
+  selector:
+    app: cherry-{%1}
+  ports:
+  - port: 5678
+    name: cherry-{%1}-tcp

@@ -30,3 +30,6 @@ docker pull registry.docker-cn.com/hashicorp/http-echo
 docker pull registry.docker-cn.com/hashicorp/http-echo
 
 docker pull b2ok6pp5.mirror.aliyuncs.com/google_containers/nginx:1.10
+
+
+wget -qO- banana-statefulset-0.banana-headless-service.default.svc.cluster.local:5678

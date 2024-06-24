@@ -1,4 +1,4 @@
-#外部直接调用\无状态
+#无状态节点
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,7 +6,7 @@ metadata:
   labels:
     app: apple
 spec:
-  replicas: 3  # 指定希望运行的Pod副本数量
+  replicas: 3 
   selector:
     matchLabels:
       app: apple
